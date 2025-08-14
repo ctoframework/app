@@ -1,0 +1,19 @@
+<h1>Self-assessment</h1>
+
+<p>Score each question from worse (1) to best (4).</p>
+
+{% for question in assessment.questions %}
+<div>
+  {{ question }}
+  <select name="question-{{ loop.index }}" id="question{{ loop.index }}">
+    <option>1</option>
+    <option>2</option>
+    <option>3</option>
+    <option>4</option>
+  </select>
+</div>
+{% endfor %}
+
+<button id="calcuslateScore" onclick="calculateScore(event);" class="button is-primary">Calculate self-assessment score</button>
+
+<div id="result"></div>

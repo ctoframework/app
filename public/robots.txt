@@ -1,0 +1,3 @@
+Sitemap: https://app.ctoframework.com/sitemap.xml
+User-agent: *
+Disallow:
