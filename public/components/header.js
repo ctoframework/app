@@ -5,14 +5,35 @@ const Links = [
   { href: "#/about", text: "About" },
 ];
 
+// Returns css template literal
+function css(strings, ...values) {
+  return String.raw(strings, ...values);
+}
+
+const stylesheet = new CSSStyleSheet();
+stylesheet.replaceSync(css`
+  nav {
+    background-color: #333;
+    padding: 1em;
+    display: flex;
+    gap: 1em;
+  }
+
+  a {
+    color: white;
+    text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+`);
+
 class MyHeader extends HTMLElement {
   constructor() {
     super();
     const shadow = this.attachShadow({ mode: "open" });
-
-    const link = document.createElement("link");
-    link.rel = "stylesheet";
-    link.href = "components/header.css";
+    shadow.adoptedStyleSheets = [stylesheet];
 
     const nav = document.createElement("nav");
     nav.innerHTML = `
@@ -21,7 +42,6 @@ class MyHeader extends HTMLElement {
       </ul>
     `;
 
-    shadow.appendChild(link);
     shadow.appendChild(nav);
 
     // Intercept clicks inside shadow DOM
